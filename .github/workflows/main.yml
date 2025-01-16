@@ -38,13 +38,12 @@ jobs:
              -D sonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/
 
       # Check the Quality Gate status.
-      - name: SonarQube Quality Gate check
+      - name: SonarQube Server Quality Gate check
         id: sonarqube-quality-gate-check
-        uses: opsverseio/sonarqube-quality-gate-action@0.1.0
-      # Force to fail step after specific time.
-        timeout-minutes: 5
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        with:
+          pollingTimeoutSec: 600
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_URL: ${{ secrets.SONAR_URL }} #OPTIONAL
-          #SET_SONAR_PROJECT_STATUS: true 
+          SONAR_HOST_URL: ${{ secrets.SONAR_URL }} #OPTIONAL
                 
