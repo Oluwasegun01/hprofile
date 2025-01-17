@@ -104,7 +104,7 @@ jobs:
         with:
           task-definition: ${{env.ECS_TASK_DEFINITION}}
           container-name: ${{env.CONTAINER_NAME}}
-          image: ${{secrets.REGISTRY}}/${{env.ECR_REPOSITORY}}:{{github.run_number}}
+          image: ${{ steps.build-image.outputs.image }}
       
       # The fourth step uses the task definition file.
       - name: Deploy Amazon ECS task definition
